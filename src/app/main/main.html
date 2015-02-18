@@ -1,0 +1,47 @@
+<div class="container">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+
+  <div class="panel">
+    <alert ng-repeat="(key, value) in messages " type="{{value.type}}">{{value.message}}</alert>
+    <div class="row ">
+      <div class="col-sm-12">
+        <div class="panel grand-total panel-success">
+          <div class="panel-body">
+            Grand total : <i class="fa fa-btc"></i><span class="value">{{wallet.grandTotal}}</span>
+          </div>
+        </div>
+        <form ng-submit="submit()">
+          <fieldset class="form-group">
+            <input placeholder="Please enter a title" id="title" type="number" class="col-sm-10 form-control" ng-model="wallet.form.entryAmount"/>
+
+            <div>
+              <label for="remove-amount">
+                <span>remove : <input id="remove-amount" type="checkbox" ng-model="wallet.form.removeEnteredAmount"/></span>
+              </label>
+            </div>
+
+          </fieldset>
+        </form>
+
+        <ul class="wallet-list">
+          <wallet-item ng-repeat="entry in wallet.entries | filter:'ADDED'" entry="entry"></wallet-item>
+        </ul>
+
+        <h3>Removed entries</h3>
+        <ul class="wallet-list">
+          <wallet-item ng-repeat="entry in wallet.entries |  filter:'REMOVED'" entry="entry"></wallet-item>
+        </ul>
+
+      </div>
+
+    </div>
+    <pre ng-show="showSource" class="source">
+          {{source}}
+    </pre>
+  </div>
+
+  <div class="panel panel-footer">
+    <small>simple wallet!</small>
+  </div>
+
+</div>
